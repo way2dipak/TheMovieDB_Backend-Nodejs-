@@ -16,6 +16,6 @@ router.use('/', (req, res, next) => {
 });
 
 router.use('/home', require('./home/model/home.model'));
-
+router.use('/genre', require('./genre/model/genre.model'));
 
 module.exports = router;
