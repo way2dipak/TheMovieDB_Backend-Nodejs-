@@ -130,11 +130,10 @@ async function getMovieDetailsByID(apiKey, movieId) {
         if (data.length !== 0) {
             return data;
         } else {
-            return {};
+            return [];
         }
     } catch (error) {
-        console.log(`errorlogged for getMovieDetailsByID: ${error}`);
-        return {}
+        return [];
     }
 }
 
@@ -244,6 +243,22 @@ async function getMoviesByFilter(apiKey, genreId, pageNo) {
     }
 }
 
+async function getBollywoodList(apikey, pageNo) {
+    try {
+        const response = await fetch(`${BASE_URL}discover/movie?api_key=${apikey}&page=${pageNo}&with_original_language=hi`);
+        const data = await response.json();
+        if (typeof data['results'] !== 'undefined') {
+            return data
+        } else {
+            console.log('returning emptydata')
+            return []
+        }
+    } catch (error) {
+        console.log(`errorlogged for bollywood: ${error}`);
+        return []
+    }
+}
+
 
 module.exports = {
     getTrendingList,
@@ -262,5 +277,6 @@ module.exports = {
     getMovieReviews,
     getMovieGenre,
     getMoviesByFilter,
+    getBollywoodList,
 
 };

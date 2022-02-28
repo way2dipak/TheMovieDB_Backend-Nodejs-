@@ -16,6 +16,7 @@ const {
     getSimilarMovies,
     getMovieReviews,
     getMoviesByFilter,
+    getBollywoodList,
 
  } = require('../routes/movie.controller');
 
@@ -23,6 +24,7 @@ const {
 router.route('/feed').get(getHomeFeeds);
 router.route('/trending/:pageNo').get(getTrendingList);
 router.route('/upcoming/:pageNo').get(getupcomingList);
+router.route('/bollywood/:pageNo').get(getBollywoodList);
 router.route('/popular/:pageNo').get(getPopularList);
 router.route('/toprated/:pageNo').get(getTopRatedList);
 router.route('/action/:pageNo').get(getActionList);
