@@ -75,7 +75,7 @@ async function getTrendingList(req, res) {
 async function getupcomingList(req, res) {
     const token = req.headers['token'];
     const pageNo = req.params.pageNo;
-    const moviesList = await datasource.getupcomingList(token, pageNo);
+    const moviesList = await datasource.getUpComingList(token, pageNo);
 
     if (moviesList.length != 0) {
         return res.status(200).json({
