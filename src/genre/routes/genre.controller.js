@@ -1,16 +1,18 @@
 const fetch = require('node-fetch');
+const genres = require('../../movie/routes/movie.controller');
 
 
 async function getMovieGenre(req, res) {
     const token = req.headers['token'];
     const response = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${token}`);
     const data = await response.json();
-    console.log(`getMovieGenre: ${JSON.stringify(data)}`);
-    if (data.length != 0) {
+    const genresList = genres.getGenresImages({results: data['genres']});
+
+    if (genresList.length != 0) {
         res.status(200).json({
             status: 200,
             message: true,
-            results: data['genres']
+            results: genresList['results']
         });
     } else {
         res.status(200).json({
@@ -19,6 +21,7 @@ async function getMovieGenre(req, res) {
         });
     }
 }
+
 
 async function getTvGenre(req, res) {
     const token = req.headers['token'];

@@ -879,5 +879,5 @@ module.exports = {
     getBestInTvMovies,
     getWarMovies,
     getWesternMovies,
-
+    getGenresImages,
 };
