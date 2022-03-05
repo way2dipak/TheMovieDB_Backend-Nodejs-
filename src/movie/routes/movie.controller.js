@@ -16,20 +16,46 @@ async function getHomeFeeds(req, res) {
     const popularList = await datasource.getPopularList(apiKey);
     const topRatedList = await datasource.getTopRatedList(apiKey);
     const topActionList = await datasource.getActionList(apiKey);
+    const comedyList = await datasource.getMoviesByFilter(apiKey, '35', 1)
+    const dramaList = await datasource.getMoviesByFilter(apiKey, '18', 1)
+    const documentaryList = await datasource.getMoviesByFilter(apiKey, '99', 1)
+    const familyList = await datasource.getMoviesByFilter(apiKey, '10751', 1)
+    const crimeList = await datasource.getMoviesByFilter(apiKey, '80', 1)
+    const romanceList = await datasource.getMoviesByFilter(apiKey, '10749', 1)
+    const historyList = await datasource.getMoviesByFilter(apiKey, '36', 1)
     const topThrillerList = await datasource.getThrillerList(apiKey);
     const bollywoodList = await datasource.getBollywoodList(apiKey);
     const kidsList = await datasource.getKidsList(apiKey);
     const horrorList = await datasource.getHorrorList(apiKey);
+    const fantasyList = await datasource.getMoviesByFilter(apiKey, '14', 1)
+    const mysteryList = await datasource.getMoviesByFilter(apiKey, '9648', 1)
+    const scifiList = await datasource.getMoviesByFilter(apiKey, '878', 1)
+    const tvList = await datasource.getMoviesByFilter(apiKey, '10770', 1)
+    const warList = await datasource.getMoviesByFilter(apiKey, '10752', 1)
+    const westernList = await datasource.getMoviesByFilter(apiKey, '37', 1)
     const homeList = getHomeListModel([
         newGenreList,
         trendingList,
         popularList,
         topRatedList,
         topActionList,
+        comedyList,
+        dramaList,
+        documentaryList,
+        familyList,
+        crimeList,
+        romanceList,
+        historyList,
         topThrillerList,
         bollywoodList,
         kidsList,
         horrorList,
+        fantasyList,
+        mysteryList,
+        scifiList,
+        tvList,
+        warList,
+        westernList,
 
     ])
     if (homeList.length !== 0) {
@@ -389,7 +415,6 @@ async function getMoviesByFilter(req, res) {
 }
 
 //BollywoodMoives
-//Similar movies api
 async function getBollywoodList(req, res) {
     let token = req.headers['token'];
     let pageNo = req.params.pageNo;
@@ -414,18 +439,329 @@ async function getBollywoodList(req, res) {
     }
 }
 
+//comedy
+async function getComedyMovies(req, res) {
+    let token = req.headers['token'];
+    let pageNo = req.params.pageNo;
+    const movieList = await datasource.getMoviesByFilter(token, '35', pageNo)
+    if (movieList.length !== 0) {
+        res.status(200).json({
+            status: 200,
+            success: true,
+            page: Number(pageNo),
+            results: movieList['results'],
+            total_pages: movieList['total_pages'],
+            total_results: movieList['total_results']
+        })
+    } else {
+        res.status(404).json({
+            status: 404,
+            success: false,
+            error: 'no movie found'
+        })
+    }
+}
+
+//Drama
+async function getDramaMovies(req, res) {
+    let token = req.headers['token'];
+    let pageNo = req.params.pageNo;
+    const movieList = await datasource.getMoviesByFilter(token, '18', pageNo)
+    if (movieList.length !== 0) {
+        res.status(200).json({
+            status: 200,
+            success: true,
+            page: Number(pageNo),
+            results: movieList['results'],
+            total_pages: movieList['total_pages'],
+            total_results: movieList['total_results']
+        })
+    } else {
+        res.status(404).json({
+            status: 404,
+            success: false,
+            error: 'no movie found'
+        })
+    }
+}
+
+//Documentry
+async function getDocumentryMovies(req, res) {
+    let token = req.headers['token'];
+    let pageNo = req.params.pageNo;
+    const movieList = await datasource.getMoviesByFilter(token, '99', pageNo)
+    if (movieList.length !== 0) {
+        res.status(200).json({
+            status: 200,
+            success: true,
+            page: Number(pageNo),
+            results: movieList['results'],
+            total_pages: movieList['total_pages'],
+            total_results: movieList['total_results']
+        })
+    } else {
+        res.status(404).json({
+            status: 404,
+            success: false,
+            error: 'no movie found'
+        })
+    }
+}
+
+//Family Movies
+async function getFamilyMovies(req, res) {
+    let token = req.headers['token'];
+    let pageNo = req.params.pageNo;
+    const movieList = await datasource.getMoviesByFilter(token, '10751', pageNo)
+    if (movieList.length !== 0) {
+        res.status(200).json({
+            status: 200,
+            success: true,
+            page: Number(pageNo),
+            results: movieList['results'],
+            total_pages: movieList['total_pages'],
+            total_results: movieList['total_results']
+        })
+    } else {
+        res.status(404).json({
+            status: 404,
+            success: false,
+            error: 'no movie found'
+        })
+    }
+}
+
+//crime
+async function getCrimeMovies(req, res) {
+    let token = req.headers['token'];
+    let pageNo = req.params.pageNo;
+    const movieList = await datasource.getMoviesByFilter(token, '80', pageNo)
+    if (movieList.length !== 0) {
+        res.status(200).json({
+            status: 200,
+            success: true,
+            page: Number(pageNo),
+            results: movieList['results'],
+            total_pages: movieList['total_pages'],
+            total_results: movieList['total_results']
+        })
+    } else {
+        res.status(404).json({
+            status: 404,
+            success: false,
+            error: 'no movie found'
+        })
+    }
+}
+
+//Romance
+async function getRomanceMovies(req, res) {
+    let token = req.headers['token'];
+    let pageNo = req.params.pageNo;
+    const movieList = await datasource.getMoviesByFilter(token, '10749', pageNo)
+    if (movieList.length !== 0) {
+        res.status(200).json({
+            status: 200,
+            success: true,
+            page: Number(pageNo),
+            results: movieList['results'],
+            total_pages: movieList['total_pages'],
+            total_results: movieList['total_results']
+        })
+    } else {
+        res.status(404).json({
+            status: 404,
+            success: false,
+            error: 'no movie found'
+        })
+    }
+}
+
+//History
+async function getHistoryMovies(req, res) {
+    let token = req.headers['token'];
+    let pageNo = req.params.pageNo;
+    const movieList = await datasource.getMoviesByFilter(token, '36', pageNo)
+    if (movieList.length !== 0) {
+        res.status(200).json({
+            status: 200,
+            success: true,
+            page: Number(pageNo),
+            results: movieList['results'],
+            total_pages: movieList['total_pages'],
+            total_results: movieList['total_results']
+        })
+    } else {
+        res.status(404).json({
+            status: 404,
+            success: false,
+            error: 'no movie found'
+        })
+    }
+}
+
+//Fantasy
+async function getFantasyMovies(req, res) {
+    let token = req.headers['token'];
+    let pageNo = req.params.pageNo;
+    const movieList = await datasource.getMoviesByFilter(token, '14', pageNo)
+    if (movieList.length !== 0) {
+        res.status(200).json({
+            status: 200,
+            success: true,
+            page: Number(pageNo),
+            results: movieList['results'],
+            total_pages: movieList['total_pages'],
+            total_results: movieList['total_results']
+        })
+    } else {
+        res.status(404).json({
+            status: 404,
+            success: false,
+            error: 'no movie found'
+        })
+    }
+}
+
+//Mystery
+async function getMysteryMovies(req, res) {
+    let token = req.headers['token'];
+    let pageNo = req.params.pageNo;
+    const movieList = await datasource.getMoviesByFilter(token, '9648', pageNo)
+    if (movieList.length !== 0) {
+        res.status(200).json({
+            status: 200,
+            success: true,
+            page: Number(pageNo),
+            results: movieList['results'],
+            total_pages: movieList['total_pages'],
+            total_results: movieList['total_results']
+        })
+    } else {
+        res.status(404).json({
+            status: 404,
+            success: false,
+            error: 'no movie found'
+        })
+    }
+}
+
+//SciFi
+async function getSciFiMovies(req, res) {
+    let token = req.headers['token'];
+    let pageNo = req.params.pageNo;
+    const movieList = await datasource.getMoviesByFilter(token, '878', pageNo)
+    if (movieList.length !== 0) {
+        res.status(200).json({
+            status: 200,
+            success: true,
+            page: Number(pageNo),
+            results: movieList['results'],
+            total_pages: movieList['total_pages'],
+            total_results: movieList['total_results']
+        })
+    } else {
+        res.status(404).json({
+            status: 404,
+            success: false,
+            error: 'no movie found'
+        })
+    }
+}
+
+//Best in TV
+async function getBestInTvMovies(req, res) {
+    let token = req.headers['token'];
+    let pageNo = req.params.pageNo;
+    const movieList = await datasource.getMoviesByFilter(token, '10770', pageNo)
+    if (movieList.length !== 0) {
+        res.status(200).json({
+            status: 200,
+            success: true,
+            page: Number(pageNo),
+            results: movieList['results'],
+            total_pages: movieList['total_pages'],
+            total_results: movieList['total_results']
+        })
+    } else {
+        res.status(404).json({
+            status: 404,
+            success: false,
+            error: 'no movie found'
+        })
+    }
+}
+
+//War
+async function getWarMovies(req, res) {
+    let token = req.headers['token'];
+    let pageNo = req.params.pageNo;
+    const movieList = await datasource.getMoviesByFilter(token, '10752', pageNo)
+    if (movieList.length !== 0) {
+        res.status(200).json({
+            status: 200,
+            success: true,
+            page: Number(pageNo),
+            results: movieList['results'],
+            total_pages: movieList['total_pages'],
+            total_results: movieList['total_results']
+        })
+    } else {
+        res.status(404).json({
+            status: 404,
+            success: false,
+            error: 'no movie found'
+        })
+    }
+}
+
+//Western
+async function getWesternMovies(req, res) {
+    let token = req.headers['token'];
+    let pageNo = req.params.pageNo;
+    const movieList = await datasource.getMoviesByFilter(token, '37', pageNo)
+    if (movieList.length !== 0) {
+        res.status(200).json({
+            status: 200,
+            success: true,
+            page: Number(pageNo),
+            results: movieList['results'],
+            total_pages: movieList['total_pages'],
+            total_results: movieList['total_results']
+        })
+    } else {
+        res.status(404).json({
+            status: 404,
+            success: false,
+            error: 'no movie found'
+        })
+    }
+}
+
 function getHomeListModel(itemList) {
     const sectionList = [
         'Explore By Genres',
         'Top Trending',
-        `What's Popular`,
+        `Popular Movies`,
         'Top Rated',
         'Action Movies',
+        'Comedy Movies',
+        'Drama',
+        'Documentary',
+        'Family Movies',
+        'Crime',
+        'Romance Movies',
+        'History',
         'Thriller Movies',
         'Movies in Hindi',
         'Best of Kids',
-        'Best of Horrors'
-
+        'Horrors',
+        'Fantasy Movies',
+        'Mystery',
+        'Sci-Fi Movies',
+        'Best in TV',
+        'War',
+        'Western Movies'
     ]
     var data = [];
     for (let i = 0; i < itemList.length; i++) {
@@ -530,5 +866,18 @@ module.exports = {
     getMovieReviews,
     getMoviesByFilter,
     getBollywoodList,
+    getComedyMovies,
+    getDramaMovies,
+    getDocumentryMovies,
+    getFamilyMovies,
+    getCrimeMovies,
+    getRomanceMovies,
+    getHistoryMovies,
+    getFantasyMovies,
+    getMysteryMovies,
+    getSciFiMovies,
+    getBestInTvMovies,
+    getWarMovies,
+    getWesternMovies,
 
 };

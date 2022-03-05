@@ -238,7 +238,7 @@ async function getMoviesByFilter(apiKey, genreId, pageNo) {
             return []
         }
     } catch (error) {
-        console.log(`errorlogged for getMovieReviews: ${error}`);
+        console.log(`errorlogged for getMoviesByFilter: ${error}`);
         return []
     }
 }
