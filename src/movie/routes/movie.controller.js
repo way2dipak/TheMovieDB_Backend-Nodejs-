@@ -779,7 +779,7 @@ function getHomeListModel(itemList) {
 
 function getGenresImages(itemList) {
     const genresImages = [
-        'https://images2.minutemediacdn.com/image/upload/c_crop,h_1235,w_2200,x_0,y_6/f_auto,q_auto,w_1100/v1623102468/shape/mentalfloss/646987-jasin_boland_-_c_2012_warner_bros._entertainment_inc.jpg', //action
+        'https://c4.wallpaperflare.com/wallpaper/278/230/516/skyscraper-dwayne-johnson-action-adventure-wallpaper-preview.jpg', //action
         'https://i.pinimg.com/originals/79/ce/dd/79ceddc54b1df97ec91a496ba10d5ab0.jpg', //adventure
         'https://static.parade.com/wp-content/uploads/2020/01/Disney-Pixar.jpg', //animation
         'https://i.ytimg.com/vi/fYCixQpLmyA/maxresdefault.jpg', //comedy
