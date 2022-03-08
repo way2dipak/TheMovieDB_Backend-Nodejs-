@@ -780,7 +780,7 @@ function getHomeListModel(itemList) {
 function getGenresImages(itemList) {
     const genresImages = [
         'https://c4.wallpaperflare.com/wallpaper/278/230/516/skyscraper-dwayne-johnson-action-adventure-wallpaper-preview.jpg', //action
-        'https://i.pinimg.com/originals/79/ce/dd/79ceddc54b1df97ec91a496ba10d5ab0.jpg', //adventure
+        'https://images.wallpapersden.com/image/download/the-jungle-book-movie-poster_bGZtaG6UmZqaraWkpJRnbW1lrWZrZmw.jpg', //adventure
         'https://static.parade.com/wp-content/uploads/2020/01/Disney-Pixar.jpg', //animation
         'https://i.ytimg.com/vi/fYCixQpLmyA/maxresdefault.jpg', //comedy
         'https://www.deadgoodbooks.co.uk/wp-content/uploads/2018/12/The-very-best-crime-movies-of-2018-Equalizer-2.jpg', //crime
@@ -789,7 +789,7 @@ function getGenresImages(itemList) {
         'https://www.ecranlarge.com/media/cache/637x252/uploads/articles/000/000/000/4puwt2dniwyi5uctmzfu9neisxu-254-large.jpg', //family
         'https://www.hollywoodreporter.com/wp-content/uploads/2019/03/avatar-publicity_still-h_2019.jpg?w=1024', //fantasy
         'https://cdn.theculturetrip.com/wp-content/uploads/2016/03/435823-ranveer-bajirao-new-650x371.jpg', //history
-        'https://s3-us-west-2.amazonaws.com/prd-rteditorial/wp-content/uploads/2020/10/28145542/Scariest_Movies_IT.jpg', //horror
+        'https://wallpaperaccess.com/full/235874.jpg', //horror
         'https://static.onecms.io/wp-content/uploads/sites/6/2021/02/09/Music_1.jpg', //music
         'https://images.indianexpress.com/2019/03/sherlock-holmes-game-of-shadows-759.jpg', //mystery
         'https://pbblogassets.s3.amazonaws.com/uploads/2020/04/01141054/titanic-cover.jpg', //romance
