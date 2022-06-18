@@ -28,7 +28,7 @@ const sectionType = {
 
 async function getMovieListBasedOn(section, apiKey, pageNo) {
     try {
-        const url = "";
+        var url = "";
         switch (section) {
             case sectionType.topTrending:
                 url = `${BASE_URL}trending/all/day?api_key=${apiKey}&page=${pageNo}`;
@@ -106,7 +106,7 @@ async function getMovieListBasedOn(section, apiKey, pageNo) {
             return []
         }
     } catch (error) {
-        console.log(`errorlogged for trending: ${error}`);
+        console.log(`errorlogged for url: ${url} =>\n ${error}`);
         return []
     }
 }
