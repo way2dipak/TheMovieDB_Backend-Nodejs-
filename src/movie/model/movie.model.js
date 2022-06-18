@@ -3,6 +3,7 @@ const router = require('express').Router();
 
 const { 
     getHomeFeeds,
+    getMovieListBasedOn,
     getTrendingList,
     getupcomingList,
     getPopularList,
@@ -35,6 +36,7 @@ const {
 
 
 router.route('/feed').get(getHomeFeeds);
+router.route('/:sectionName/:pageNo').get(getMovieListBasedOn);
 router.route('/trending/:pageNo').get(getTrendingList);
 router.route('/upcoming/:pageNo').get(getupcomingList);
 router.route('/bollywood/:pageNo').get(getBollywoodList);

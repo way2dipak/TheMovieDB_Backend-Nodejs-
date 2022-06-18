@@ -73,6 +73,31 @@ async function getHomeFeeds(req, res) {
     }
 }
 
+//Movie list based on section type
+async function getMovieListBasedOn(req, res) {
+    const token = req.headers['token'];
+    const sectionName = req.params.sectionName;
+    const pageNo = req.params.pageNo;
+    const movieList = await datasource.getMovieListBasedOn(sectionName, token, pageNo);
+
+    if (moviesList.length != 0) {
+        return res.status(200).json({
+            status: 200,
+            success: true,
+            page: Number(pageNo),
+            results: moviesList['results'],
+            total_pages: moviesList['total_pages'],
+            total_results: moviesList['total_results']
+        });
+    } else {
+        return res.status(200).json({
+            status: 200,
+            success: false,
+            error: 'ta da!! no more data...'
+        });
+    }
+}
+
 //top trending api
 async function getTrendingList(req, res) {
     const token = req.headers['token'];
@@ -852,6 +877,7 @@ function shuffleArray(array) {
 
 module.exports = {
     getHomeFeeds,
+    getMovieListBasedOn,
     getTrendingList,
     getupcomingList,
     getPopularList,

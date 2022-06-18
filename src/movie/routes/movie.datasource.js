@@ -2,6 +2,113 @@ const { type } = require('express/lib/response');
 const fetch = require('node-fetch');
 const BASE_URL = 'https://api.themoviedb.org/3/';
 
+const sectionType = {
+    topTrending: "top trending",
+    popularMovie: "Popular Movies",
+    topRated: "top rated",
+    action: "action movies",
+    comedy: "comedy movies",
+    drama: "drama",
+    documentary: "documentary",
+    familyMovie: "family movies",
+    crime: "crime",
+    romance: "romance movies",
+    history: "history",
+    thriller: "thriller movies",
+    bollywood: "movies in hindi",
+    kids: "best of kids",
+    horror: "horrors",
+    fantasy: "fantasy movies",
+    mystery: "mystery",
+    scifi: "sci-fi movies",
+    bestInTV: "best in tv",
+    war: "war",
+    westernMovies: "western movies"
+};
+
+async function getMovieListBasedOn(section, apikey, pageNo) {
+    try {
+        const url = "";
+        switch (section) {
+            case sectionType.topTrending:
+                url = `${BASE_URL}trending/all/day?api_key=${apiKey}&page=${pageNo}`;
+                break;
+                case sectionType.popularMovie:
+                    url = `${BASE_URL}movie/popular?api_key=${apiKey}&page=${pageNo}`;
+                break;
+                case sectionType.topRated:
+                    url = `${BASE_URL}movie/top_rated?api_key=${apiKey}&page=${pageNo}`;
+                break;
+                case sectionType.action:
+                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=28&page=${pageNo}`;
+                break;
+                case sectionType.comedy:
+                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=35&page=${pageNo}`;
+                break;
+                case sectionType.drama:
+                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=18&page=${pageNo}`;
+                break;
+                case sectionType.documentary:
+                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=99&page=${pageNo}`;
+                break;
+                case sectionType.familyMovie:
+                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=10751&page=${pageNo}`;
+                break;
+                case sectionType.crime:
+                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=80&page=${pageNo}`;
+                break;
+                case sectionType.romance:
+                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=10749&page=${pageNo}`;
+                break;
+                case sectionType.history:
+                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=36&page=${pageNo}`;
+                break;
+                case sectionType.thriller:
+                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=53&page=${pageNo}`;
+                break;
+                case sectionType.bollywood:
+                    url = `${BASE_URL}discover/movie?api_key=${apikey}&page=${pageNo}&with_original_language=hi`;
+                break;
+                case sectionType.kids:
+                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=16&page=${pageNo}`;
+                break;
+                case sectionType.horror:
+                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=27&page=${pageNo}`;
+                break;
+                case sectionType.fantasy:
+                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=14&page=${pageNo}`;
+                    break;
+                    case sectionType.mystery:
+                        url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=9648&page=${pageNo}`;
+                    break;
+                    case sectionType.scifi:
+                        url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=878&page=${pageNo}`;
+                    break;
+                    case sectionType.bestInTV:
+                        url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=10770&page=${pageNo}`;
+                    break;
+                    case sectionType.war:
+                        url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=10752&page=${pageNo}`;
+                    break;
+                    case sectionType.westernMovies:
+                        url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=37&page=${pageNo}`;
+                    break;  
+                    default:
+                        break;              
+        }
+        const response = await fetch(url);
+        const data = await response.json();
+        if (typeof data['results'] !== 'undefined') {
+            return data
+        } else {
+            return []
+        }
+    } catch (error) {
+        console.log(`errorlogged for trending: ${error}`);
+        return []
+    }
+}
+
 async function getTrendingList(apiKey, pageNo) {
     try {
         const response = await fetch(`${BASE_URL}trending/all/day?api_key=${apiKey}&page=${pageNo}`);
@@ -278,5 +385,5 @@ module.exports = {
     getMovieGenre,
     getMoviesByFilter,
     getBollywoodList,
-
+    getMovieListBasedOn,
 };
