@@ -26,7 +26,7 @@ const sectionType = {
     westernMovies: "western movies"
 };
 
-async function getMovieListBasedOn(section, apikey, pageNo) {
+async function getMovieListBasedOn(section, apiKey, pageNo) {
     try {
         const url = "";
         switch (section) {
