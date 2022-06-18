@@ -78,7 +78,7 @@ async function getMovieListBasedOn(req, res) {
     const token = req.headers['token'];
     const sectionName = req.params.sectionName;
     const pageNo = req.params.pageNo;
-    const movieList = await datasource.getMovieListBasedOn(sectionName, token, pageNo);
+    const moviesList = await datasource.getMovieListBasedOn(sectionName, token, pageNo);
 
     if (moviesList.length != 0) {
         return res.status(200).json({
