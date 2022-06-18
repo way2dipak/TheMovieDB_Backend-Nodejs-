@@ -97,7 +97,7 @@ async function getMovieListBasedOn(section, apikey, pageNo) {
                 return [];
                 break;
         }
-        console.log("url:", url);
+        console.log(`url: ${url}`);
         const response = await fetch(url);
         const data = await response.json();
         if (typeof data['results'] !== 'undefined') {
