@@ -33,68 +33,69 @@ async function getMovieListBasedOn(section, apikey, pageNo) {
             case sectionType.topTrending:
                 url = `${BASE_URL}trending/all/day?api_key=${apiKey}&page=${pageNo}`;
                 break;
-                case sectionType.popularMovie:
-                    url = `${BASE_URL}movie/popular?api_key=${apiKey}&page=${pageNo}`;
+            case sectionType.popularMovie:
+                url = `${BASE_URL}movie/popular?api_key=${apiKey}&page=${pageNo}`;
                 break;
-                case sectionType.topRated:
-                    url = `${BASE_URL}movie/top_rated?api_key=${apiKey}&page=${pageNo}`;
+            case sectionType.topRated:
+                url = `${BASE_URL}movie/top_rated?api_key=${apiKey}&page=${pageNo}`;
                 break;
-                case sectionType.action:
-                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=28&page=${pageNo}`;
+            case sectionType.action:
+                url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=28&page=${pageNo}`;
                 break;
-                case sectionType.comedy:
-                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=35&page=${pageNo}`;
+            case sectionType.comedy:
+                url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=35&page=${pageNo}`;
                 break;
-                case sectionType.drama:
-                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=18&page=${pageNo}`;
+            case sectionType.drama:
+                url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=18&page=${pageNo}`;
                 break;
-                case sectionType.documentary:
-                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=99&page=${pageNo}`;
+            case sectionType.documentary:
+                url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=99&page=${pageNo}`;
                 break;
-                case sectionType.familyMovie:
-                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=10751&page=${pageNo}`;
+            case sectionType.familyMovie:
+                url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=10751&page=${pageNo}`;
                 break;
-                case sectionType.crime:
-                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=80&page=${pageNo}`;
+            case sectionType.crime:
+                url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=80&page=${pageNo}`;
                 break;
-                case sectionType.romance:
-                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=10749&page=${pageNo}`;
+            case sectionType.romance:
+                url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=10749&page=${pageNo}`;
                 break;
-                case sectionType.history:
-                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=36&page=${pageNo}`;
+            case sectionType.history:
+                url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=36&page=${pageNo}`;
                 break;
-                case sectionType.thriller:
-                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=53&page=${pageNo}`;
+            case sectionType.thriller:
+                url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=53&page=${pageNo}`;
                 break;
-                case sectionType.bollywood:
-                    url = `${BASE_URL}discover/movie?api_key=${apikey}&page=${pageNo}&with_original_language=hi`;
+            case sectionType.bollywood:
+                url = `${BASE_URL}discover/movie?api_key=${apikey}&page=${pageNo}&with_original_language=hi`;
                 break;
-                case sectionType.kids:
-                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=16&page=${pageNo}`;
+            case sectionType.kids:
+                url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=16&page=${pageNo}`;
                 break;
-                case sectionType.horror:
-                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=27&page=${pageNo}`;
+            case sectionType.horror:
+                url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=27&page=${pageNo}`;
                 break;
-                case sectionType.fantasy:
-                    url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=14&page=${pageNo}`;
-                    break;
-                    case sectionType.mystery:
-                        url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=9648&page=${pageNo}`;
-                    break;
-                    case sectionType.scifi:
-                        url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=878&page=${pageNo}`;
-                    break;
-                    case sectionType.bestInTV:
-                        url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=10770&page=${pageNo}`;
-                    break;
-                    case sectionType.war:
-                        url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=10752&page=${pageNo}`;
-                    break;
-                    case sectionType.westernMovies:
-                        url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=37&page=${pageNo}`;
-                    break;  
-                    default:
-                        break;              
+            case sectionType.fantasy:
+                url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=14&page=${pageNo}`;
+                break;
+            case sectionType.mystery:
+                url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=9648&page=${pageNo}`;
+                break;
+            case sectionType.scifi:
+                url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=878&page=${pageNo}`;
+                break;
+            case sectionType.bestInTV:
+                url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=10770&page=${pageNo}`;
+                break;
+            case sectionType.war:
+                url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=10752&page=${pageNo}`;
+                break;
+            case sectionType.westernMovies:
+                url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=37&page=${pageNo}`;
+                break;
+            default:
+                return [];
+                break;
         }
         const response = await fetch(url);
         const data = await response.json();
@@ -325,13 +326,13 @@ async function getMovieGenre(token) {
         const response = await fetch(`${BASE_URL}/genre/movie/list?api_key=${token}`);
         const data = await response.json();
         if (typeof data['genres'] !== 'undefined') {
-            return {results: data['genres']};
+            return { results: data['genres'] };
         } else {
             return [];
         }
     } catch (error) {
-    console.log(`errorlogged for getMovieGenre: ${error}`);
-    return []
+        console.log(`errorlogged for getMovieGenre: ${error}`);
+        return []
     }
 }
 
