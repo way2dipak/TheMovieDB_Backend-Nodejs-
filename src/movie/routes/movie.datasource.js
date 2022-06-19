@@ -4,7 +4,7 @@ const BASE_URL = 'https://api.themoviedb.org/3/';
 
 const sectionType = {
     topTrending: "top trending",
-    popularMovie: "Popular Movies",
+    popularMovie: "popular movies",
     topRated: "top rated",
     action: "action movies",
     comedy: "comedy movies",
