@@ -36,7 +36,6 @@ const {
 
 
 router.route('/feed').get(getHomeFeeds);
-router.route('/:sectionName/:pageNo').get(getMovieListBasedOn);
 router.route('/trending/:pageNo').get(getTrendingList);
 router.route('/upcoming/:pageNo').get(getupcomingList);
 router.route('/bollywood/:pageNo').get(getBollywoodList);
@@ -66,7 +65,7 @@ router.route('/:movieId/recommendedmovies/:pageNo').get(getRecommendedMovies);
 router.route('/:movieId/similarmovies/:pageNo').get(getSimilarMovies);
 router.route('/:movieId/reviews/:pageNo').get(getMovieReviews);
 router.route('/filter/:genreId/:pageNo').get(getMoviesByFilter);
-
+router.route('/:sectionName/:pageNo').get(getMovieListBasedOn);
 
 
 module.exports = router;

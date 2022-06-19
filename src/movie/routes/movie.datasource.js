@@ -239,6 +239,7 @@ async function getMovieDetailsByID(apiKey, movieId) {
         if (data.length !== 0) {
             return data;
         } else {
+            console.log(`url: ${url}\n data: ${data.length}`);
             return [];
         }
     } catch (error) {

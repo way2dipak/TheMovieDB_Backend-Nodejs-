@@ -93,7 +93,7 @@ async function getMovieListBasedOn(req, res) {
         return res.status(200).json({
             status: 200,
             success: false,
-            error: 'ta da!! no more data...'
+            error: 'ta da!! no more based...'
         });
     }
 }
@@ -117,7 +117,7 @@ async function getTrendingList(req, res) {
         return res.status(200).json({
             status: 200,
             success: false,
-            error: 'ta da!! no more data...'
+            error: 'ta da!! no more trending...'
         });
     }
 }
@@ -141,7 +141,7 @@ async function getupcomingList(req, res) {
         return res.status(200).json({
             status: 200,
             success: false,
-            error: 'ta da!! no more data...'
+            error: 'ta da!! no more upcoming...'
         });
     }
 }
@@ -165,7 +165,7 @@ async function getPopularList(req, res) {
         return res.status(200).json({
             status: 200,
             success: false,
-            error: 'ta da!! no more data...'
+            error: 'ta da!! no more popular...'
         });
     }
 }
@@ -189,7 +189,7 @@ async function getTopRatedList(req, res) {
         return res.status(200).json({
             status: 200,
             success: false,
-            error: 'ta da!! no more data...'
+            error: 'ta da!! no more top rated...'
         });
     }
 }
@@ -213,7 +213,7 @@ async function getActionList(req, res) {
         return res.status(200).json({
             status: 200,
             success: false,
-            error: 'ta da!! no more data...'
+            error: 'ta da!! no more action...'
         });
     }
 }
@@ -237,7 +237,7 @@ async function getThrillerList(req, res) {
         return res.status(200).json({
             status: 200,
             success: false,
-            error: 'ta da!! no more data...'
+            error: 'ta da!! no more thriller...'
         });
     }
 }
@@ -261,7 +261,7 @@ async function getKidsList(req, res) {
         return res.status(200).json({
             status: 200,
             success: false,
-            error: 'ta da!! no more data...'
+            error: 'ta da!! no more kids...'
         });
     }
 }
@@ -285,7 +285,7 @@ async function getHorrorList(req, res) {
         return res.status(200).json({
             status: 200,
             success: false,
-            error: 'ta da!! no more data...'
+            error: 'ta da!! no more horror movies...'
         });
     }
 }
@@ -294,7 +294,6 @@ async function getHorrorList(req, res) {
 async function getMovieDetailsByID(req, res) {
     const token = req.headers['token'];
     const movieId = req.params.movieId;
-
     const pageNo = 1;
     const headerDetails = await datasource.getMovieDetailsByID(token, movieId)
     
@@ -316,7 +315,7 @@ async function getMovieDetailsByID(req, res) {
             results: castList
         };
 
-        console.log(`recommendedList: ${recommendedList}`);
+        console.log(`header: ${headerDetails}`);
 
         const movieList = getMoviDetailsModel([
             headerList,
