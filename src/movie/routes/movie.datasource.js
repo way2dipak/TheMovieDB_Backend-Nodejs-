@@ -325,7 +325,7 @@ async function getMovieReviews(apiKey, movieId, pageNo) {
 
 async function getMovieGenre(token) {
     try {
-        const response = await fetch(`${BASE_URL}/genre/movie/list?api_key=${token}`);
+        const response = await fetch(`${BASE_URL}genre/movie/list?api_key=${token}`);
         const data = await response.json();
         if (typeof data['genres'] !== 'undefined') {
             return { results: data['genres'] };
