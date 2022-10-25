@@ -27,9 +27,10 @@ const sectionType = {
 };
 
 async function getMovieListBasedOn(section, apiKey, pageNo) {
+    console.log(`section: ${section}, apiKey: ${apiKey}, page: ${pageNo}`);
     try {
         var url = "";
-        switch (section) {
+        switch (section.toLowerCase()) {
             case sectionType.topTrending:
                 url = `${BASE_URL}trending/all/day?api_key=${apiKey}&page=${pageNo}`;
                 break;
@@ -67,7 +68,7 @@ async function getMovieListBasedOn(section, apiKey, pageNo) {
                 url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=53&page=${pageNo}`;
                 break;
             case sectionType.bollywood:
-                url = `${BASE_URL}discover/movie?api_key=${apikey}&page=${pageNo}&with_original_language=hi`;
+                url = `${BASE_URL}discover/movie?api_key=${apiKey}&page=${pageNo}&with_original_language=hi`;
                 break;
             case sectionType.kids:
                 url = `${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=16&page=${pageNo}`;
@@ -107,127 +108,6 @@ async function getMovieListBasedOn(section, apiKey, pageNo) {
         }
     } catch (error) {
         console.log(`errorlogged for url: ${url} =>\n ${error}`);
-        return []
-    }
-}
-
-async function getTrendingList(apiKey, pageNo) {
-    try {
-        const response = await fetch(`${BASE_URL}trending/all/day?api_key=${apiKey}&page=${pageNo}`);
-        const data = await response.json();
-        if (typeof data['results'] !== 'undefined') {
-            return data
-        } else {
-            return []
-        }
-    } catch (error) {
-        console.log(`errorlogged for trending: ${error}`);
-        return []
-    }
-}
-
-async function getUpComingList(apiKey, pageNo) {
-    try {
-        const response = await fetch(`${BASE_URL}movie/upcoming?api_key=${apiKey}&page=${pageNo}`);
-        const data = await response.json();
-        if (typeof data['results'] !== 'undefined') {
-            return data
-        } else {
-            console.log('returning emptydata')
-            return []
-        }
-    } catch (error) {
-        console.log(`errorlogged for upcoming: ${error}`);
-        return []
-    }
-}
-
-async function getPopularList(apiKey, pageNo) {
-    try {
-        const response = await fetch(`${BASE_URL}movie/popular?api_key=${apiKey}&page=${pageNo}`);
-        const data = await response.json();
-        if (typeof data['results'] !== 'undefined') {
-            return data
-        } else {
-            return []
-        }
-    } catch (error) {
-        console.log(`errorlogged for popular: ${error}`);
-        return []
-    }
-}
-
-async function getTopRatedList(apiKey, pageNo) {
-    try {
-        const response = await fetch(`${BASE_URL}movie/top_rated?api_key=${apiKey}&page=${pageNo}`);
-        const data = await response.json();
-        if (typeof data['results'] !== 'undefined') {
-            return data
-        } else {
-            return []
-        }
-    } catch (error) {
-        console.log(`errorlogged for topRated: ${error}`);
-        return []
-    }
-}
-
-async function getActionList(apiKey, pageNo) {
-    try {
-        const response = await fetch(`${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=28&page=${pageNo}`);
-        const data = await response.json();
-        if (typeof data['results'] !== 'undefined') {
-            return data
-        } else {
-            return []
-        }
-    } catch (error) {
-        console.log(`errorlogged for action: ${error}`);
-        return []
-    }
-}
-
-async function getThrillerList(apiKey, pageNo) {
-    try {
-        const response = await fetch(`${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=53&page=${pageNo}`);
-        const data = await response.json();
-        if (typeof data['results'] !== 'undefined') {
-            return data
-        } else {
-            return []
-        }
-    } catch (error) {
-        console.log(`errorlogged for thriller: ${error}`);
-        return []
-    }
-}
-
-async function getKidsList(apiKey, pageNo) {
-    try {
-        const response = await fetch(`${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=16&page=${pageNo}`);
-        const data = await response.json();
-        if (typeof data['results'] !== 'undefined') {
-            return data
-        } else {
-            return []
-        }
-    } catch (error) {
-        console.log(`errorlogged for kids: ${error}`);
-        return []
-    }
-}
-
-async function getHorrorList(apiKey, pageNo) {
-    try {
-        const response = await fetch(`${BASE_URL}discover/movie?api_key=${apiKey}&with_genres=27&page=${pageNo}`);
-        const data = await response.json();
-        if (typeof data['results'] !== 'undefined') {
-            return data
-        } else {
-            return []
-        }
-    } catch (error) {
-        console.log(`errorlogged for horror: ${error}`);
         return []
     }
 }
@@ -353,32 +233,7 @@ async function getMoviesByFilter(apiKey, genreId, pageNo) {
     }
 }
 
-async function getBollywoodList(apikey, pageNo) {
-    try {
-        const response = await fetch(`${BASE_URL}discover/movie?api_key=${apikey}&page=${pageNo}&with_original_language=hi`);
-        const data = await response.json();
-        if (typeof data['results'] !== 'undefined') {
-            return data
-        } else {
-            console.log('returning emptydata')
-            return []
-        }
-    } catch (error) {
-        console.log(`errorlogged for bollywood: ${error}`);
-        return []
-    }
-}
-
-
 module.exports = {
-    getTrendingList,
-    getUpComingList,
-    getPopularList,
-    getTopRatedList,
-    getActionList,
-    getThrillerList,
-    getKidsList,
-    getHorrorList,
     getMovieDetailsByID,
     getCastAndCrew,
     getMovieTrailers,
@@ -387,6 +242,5 @@ module.exports = {
     getMovieReviews,
     getMovieGenre,
     getMoviesByFilter,
-    getBollywoodList,
     getMovieListBasedOn,
 };
