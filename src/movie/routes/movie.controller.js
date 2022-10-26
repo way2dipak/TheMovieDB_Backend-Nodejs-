@@ -825,13 +825,36 @@ function getGenresImages(itemList) {
         'https://mwi.usma.edu/wp-content/uploads/2018/09/5619029758_351bdd36aa_o-1200x640.jpg', //war
         'https://sofy.tv/blog/wp-content/uploads/2018/03/1-18.jpg' //western
     ]
+    //Color Code
+    const genresColorCode = [
+        '#EC3C1A',
+        '#008F00',
+        '#3DACF7',
+        '#42C1F7',
+        '#FF2600',
+        '#D4FB79',
+        '#C0C0C0',
+        '#FF85FF',
+        '#FFD479',
+        '#7A81FF',
+        '#4F0421',
+        '#FF9300',
+        '#3802DA',
+        '#FF2F92',
+        '#0096FF',
+        '#9437FF',
+        '#5E5E5E',
+        '#011993',
+        '#009193'
+    ]
     const movieList = itemList['results'];
     var data = [];
     for (let i = 0; i < movieList.length; i++) {
         data.push({
             id: Number(movieList[i]['id']),
             name: movieList[i]['name'],
-            backdrop_path: genresImages[i]
+            backdrop_path: genresImages[i],
+            background: genresColorCode[i]
         })
     }
     itemList['results'] = data;
