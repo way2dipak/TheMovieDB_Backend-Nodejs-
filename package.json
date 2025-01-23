@@ -12,9 +12,12 @@
   "author": "DS",
   "license": "ISC",
   "dependencies": {
+    "@vreden/youtube_scraper": "^1.2.4",
+    "all": "^0.0.0",
     "body-parser": "^1.19.1",
-    "express": "^4.17.2",
+    "express": "^4.21.2",
     "node-fetch": "^2.6.7",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "ytdl-core": "^4.11.5"
   }
 }
