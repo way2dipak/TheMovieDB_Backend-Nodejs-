@@ -33,7 +33,7 @@ app.use((err, req, res) => {
       success: false,
       message: { code: 500, text: 'Not Found' }
     });
-  });
+});
 
 app.listen(PORT, () => {
     console.log(`Server started on port: ${PORT}...`);
