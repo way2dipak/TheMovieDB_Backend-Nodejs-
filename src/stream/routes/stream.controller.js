@@ -4,16 +4,16 @@ const { status } = require('express/lib/response');
 const {ytmp4} = require('@vreden/youtube_scraper');
 
 async function getStreamURL(req, res) {
-    const videoUrl = req.query.url;
+    const videoId = req.query.id;
     const quality = "720";
-    if (!videoUrl) {
+    if (!videoId) {
         res.status(400).json({
             status: 400,
             message: false,
             error: "url cannot be empty"
         });
     } else {
-
+        const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
         ytmp4(videoUrl, quality)
         .then(result => {
             if (result.status) {
