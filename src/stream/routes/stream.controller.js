@@ -2,10 +2,11 @@ const ytdl = require('ytdl-core');
 const stream = require('../../stream/routes/stream.controller');
 const { status } = require('express/lib/response');
 const {ytmp4} = require('@vreden/youtube_scraper');
+const { youtubedl } = require('@bochilteam/scraper-youtube');
 
 async function getStreamURL(req, res) {
     const videoId = req.query.id;
-    const quality = "720";
+    const quality = "360";
     if (!videoId) {
         res.status(400).json({
             status: 400,
