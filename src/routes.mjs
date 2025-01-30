@@ -15,9 +15,9 @@ router.use('/', (req, res, next) => {
         }
 });
 
-router.use('/movie', require('./movie/model/movie.model'));
+router.use('/movie', require('./movie/model/movie.model.mjs'));
 router.use('/genre', require('./genre/model/genre.model'));
-router.use('/search', require('./search/model/search.model'));
-router.use('/stream', require('./stream/model/stream.model'));
+router.use('/search', require('./search/model/search.model.mjs'));
+router.use('/stream', require('./stream/model/stream.model.mjs'));
 
 module.exports = router;

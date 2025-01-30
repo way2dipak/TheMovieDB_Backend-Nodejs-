@@ -1,5 +1,5 @@
 const ytdl = require('ytdl-core');
-const stream = require('../../stream/routes/stream.controller');
+const stream = require('./stream.controller.mjs');
 const { status } = require('express/lib/response');
 const {ytmp4} = require('@vreden/youtube_scraper');
 
