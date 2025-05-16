@@ -10,22 +10,42 @@ async function getYouTubePlaybackUrls(videoUrl) {
       youtubeSkipDashManifest: true,
     });
 
-    const formats = output.formats
-      .filter(f => f.url)
-      .map(f => ({
-        itag: f.itag,
-        quality: f.qualityLabel || f.format,
-        ext: f.ext,
-        acodec: f.acodec,
-        vcodec: f.vcodec,
-        url: f.url,
-      }));
+    // Choose best quality format (e.g., 720p)
+    const bestFormat = output.formats.find(f => f.qualityLabel === '720p' && f.url);
+
+    const metadata = {
+      type: "video",
+      videoID: output.id,
+      url: videoUrl,
+      title: output.title,
+      description: output.description,
+      image: output.thumbnail,
+      thumbnail: output.thumbnail,
+      seconds: output.duration,
+      timestamp: new Date(output.upload_date).toISOString(), // if available
+      duration: {
+        seconds: output.duration,
+        timestamp: new Date(output.duration * 1000).toISOString().substr(11, 8) // HH:mm:ss
+      },
+      ago: output.upload_date, // could be improved
+      views: output.view_count,
+      author: {
+        name: output.uploader,
+        url: output.uploader_url || null
+      }
+    };
+
+    const stream = {
+      status: !!bestFormat,
+      quality: bestFormat?.qualityLabel || null,
+      availableQuality: [...new Set(output.formats.map(f => f.qualityLabel).filter(Boolean))],
+      url: bestFormat?.url || null,
+      filename: output._filename || null
+    };
 
     return {
-      title: output.title,
-      uploader: output.uploader,
-      duration: output.duration,
-      formats,
+      metadata,
+      stream
     };
   } catch (err) {
     throw new Error('Error fetching video info: ' + err.message);
@@ -44,11 +64,11 @@ async function getStreamURL(req, res) {
   }
 
   try {
-    const videoDetails = await getYouTubePlaybackUrls(videoUrl);
+    const results = await getYouTubePlaybackUrls(videoUrl);
     return res.status(200).json({
       status: 200,
       message: true,
-      results: videoDetails
+      results
     });
   } catch (error) {
     return res.status(500).json({
