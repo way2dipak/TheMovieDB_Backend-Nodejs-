@@ -9,7 +9,7 @@ const {
     getSimilarMovies,
     getMovieReviews,
     getMoviesByFilter,
- } = require('../routes/movie.controller');
+ } = require('../routes/movie.controller.js');
 
 
 router.route('/feed').get(getHomeFeeds);

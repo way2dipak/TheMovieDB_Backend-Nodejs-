@@ -3,8 +3,8 @@ const {
 } = require('body-parser');
 const {
     head
-} = require('../model/movie.model');
-const datasource = require('./movie.datasource');
+} = require('../model/movie.model.js');
+const datasource = require('./movie.datasource.js');
 
 //home feed api
 async function getHomeFeeds(req, res) {

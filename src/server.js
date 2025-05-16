@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 8000 ;
 
 app.use(express.json());
 
-app.use('/v1', require('./routes'));
+app.use('/v1', require('./routes.js'));
 app.use(bodyParser.json({limit: '50mb', type: 'application/json'}))
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true}));
 

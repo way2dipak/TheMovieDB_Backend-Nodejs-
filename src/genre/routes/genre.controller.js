@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const genres = require('../../movie/routes/movie.controller');
+const genres = require('../../movie/routes/movie.controller.js');
 
 
 async function getMovieGenre(req, res) {

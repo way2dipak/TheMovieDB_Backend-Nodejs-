@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const {
     getStreamURL,
-} = require('../../stream/routes/stream.controller');
+} = require('../routes/stream.controller.js');
 
 router.route('/video').get(getStreamURL);
 

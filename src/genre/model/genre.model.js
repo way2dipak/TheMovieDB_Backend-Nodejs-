@@ -3,7 +3,7 @@ const router = require('express').Router();
 const {
     getMovieGenre,
     getTvGenre,
- } = require('../../genre/routes/genre.controller');
+ } = require('../routes/genre.controller.js');
 
 
 router.route('/movie').get(getMovieGenre);
