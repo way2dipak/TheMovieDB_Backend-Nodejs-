@@ -1,7 +1,9 @@
+const path = require('path');
 const youtubedl = require('youtube-dl-exec');
 
 async function getYouTubePlaybackUrls(videoID) {
   const videoUrl = `https://www.youtube.com/watch?v=${videoID}`;
+  const cookiesPath = path.resolve(__dirname, 'cookies.txt');
 
   try {
     const output = await youtubedl(videoUrl, {
@@ -10,6 +12,7 @@ async function getYouTubePlaybackUrls(videoID) {
       noCheckCertificate: true,
       preferFreeFormats: true,
       youtubeSkipDashManifest: true,
+      cookies: cookiesPath
     });
 
     const metadata = {
