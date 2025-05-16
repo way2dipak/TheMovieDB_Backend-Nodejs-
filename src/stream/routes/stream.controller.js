@@ -2,7 +2,6 @@ const path = require('path');
 const { execFile } = require('child_process');
 
 const ytdlpPath = path.resolve(__dirname, 'bin/yt-dlp');
-const cookiesPath = path.resolve(__dirname, 'cookies.txt');
 
 async function getYouTubePlaybackUrls(videoID) {
   const videoUrl = `https://www.youtube.com/watch?v=${videoID}`;
@@ -15,7 +14,7 @@ async function getYouTubePlaybackUrls(videoID) {
       '--prefer-free-formats',
       '--youtube-skip-dash-manifest',
       '--no-playlist',
-      '--cookies', cookiesPath,
+      '--cookies', './cookies.txt',
       videoUrl
     ];
 
