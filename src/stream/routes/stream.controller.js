@@ -1,54 +1,58 @@
 const path = require('path');
-const youtubedl = require('youtube-dl-exec');
+const { execFile } = require('child_process');
+
+const ytdlpPath = path.resolve(__dirname, 'bin/yt-dlp');
+const cookiesPath = path.resolve(__dirname, 'cookies.txt');
 
 async function getYouTubePlaybackUrls(videoID) {
   const videoUrl = `https://www.youtube.com/watch?v=${videoID}`;
-  const cookiesPath = path.resolve(__dirname, 'cookies.txt');
 
-  try {
-    const output = await youtubedl(videoUrl, {
-      dumpSingleJson: true,
-      noWarnings: true,
-      noCheckCertificate: true,
-      preferFreeFormats: true,
-      youtubeSkipDashManifest: true,
-      cookies: cookiesPath
-    });
+  return new Promise((resolve, reject) => {
+    const args = [
+      '--dump-json',
+      '--no-warnings',
+      '--no-check-certificate',
+      '--prefer-free-formats',
+      '--youtube-skip-dash-manifest',
+      '--no-playlist',
+      '--cookies', cookiesPath,
+      videoUrl
+    ];
 
-    const metadata = {
-      type: "video",
-      videoID: output.id,
-      url: videoUrl,
-      title: output.title,
-      description: output.description,
-      image: output.thumbnail,
-      thumbnail: output.thumbnail,
-      seconds: output.duration,
-      timestamp: output.timestamp,
-      // duration: {
-      //   seconds: output.duration,
-      //   timestamp: output.duration
-      //     ? new Date(output.duration * 1000).toISOString().substr(11, 8)
-      //     : null,
-      // },
-      // ago: ago,
-      views: output.view_count,
-    };
+    execFile(ytdlpPath, args, (error, stdout, stderr) => {
+      if (error) {
+        return reject(new Error(`yt-dlp error: ${stderr || error.message}`));
+      }
 
-    const stream = {
+      try {
+        const output = JSON.parse(stdout);
+
+        const metadata = {
+          type: "video",
+          videoID: output.id,
+          url: videoUrl,
+          title: output.title,
+          description: output.description,
+          image: output.thumbnail,
+          thumbnail: output.thumbnail,
+          seconds: output.duration,
+          timestamp: output.timestamp,
+          views: output.view_count,
+        };
+
+        const stream = {
       status: output.url == "" ? false : true,
       quality: output.height,
       url: output.url || null,
       filename: output.title,
     };
 
-    return {
-      metadata,
-      stream,
-    };
-  } catch (err) {
-    throw new Error('Error fetching video info: ' + err.message);
-  }
+        resolve({ metadata, stream });
+      } catch (parseErr) {
+        reject(new Error("Failed to parse yt-dlp output: " + parseErr.message));
+      }
+    });
+  });
 }
 
 async function getStreamURL(req, res) {
@@ -81,3 +85,4 @@ async function getStreamURL(req, res) {
 module.exports = {
   getStreamURL,
 };
+

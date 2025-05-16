@@ -19,7 +19,6 @@
     "express": "^4.21.2",
     "node-fetch": "^2.6.7",
     "nodemon": "^2.0.15",
-    "youtube-dl-exec": "^3.0.21",
     "ytdl-core": "^4.11.5"
   }
 }
