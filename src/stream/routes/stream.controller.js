@@ -1,59 +1,46 @@
-const path = require('path');
-const { execFile } = require('child_process');
+const fetch = require('node-fetch');
 
-const ytdlpPath = path.resolve(__dirname, 'bin/yt-dlp');
+async function getYouTubePlaybackUrls(videoID, quality = '360') {
+  const url = `https://youtube-video-fast-downloader-24-7.p.rapidapi.com/download_video/${videoID}?quality=${quality}`;
+  const options = {
+    method: 'GET',
+    headers: {
+      'x-rapidapi-key': '3bd8deb81fmsh9101e25de8888efp1f5e8ejsnd86b066ee441',
+      'x-rapidapi-host': 'youtube-video-fast-downloader-24-7.p.rapidapi.com'
+    }
+  };
 
-async function getYouTubePlaybackUrls(videoID) {
-  const videoUrl = `https://www.youtube.com/watch?v=${videoID}`;
+  try {
+    const response = await fetch(url, options);
+    const json = await response.json();
 
-  return new Promise((resolve, reject) => {
-    const args = [
-      '--dump-json',
-      '--no-warnings',
-      '--no-check-certificate',
-      '--prefer-free-formats',
-      '--youtube-skip-dash-manifest',
-      '--no-playlist',
-      '--cookies', './cookies.txt',
-      videoUrl
-    ];
+    if (json.file) {
+      const metadata = {
+        type: json.type || "video",
+        videoID: videoID,
+        title: json.title || 'Untitled',
+        quality: json.quality,
+        mime: json.mime,
+        comment: json.comment,
+      };
 
-    execFile(ytdlpPath, args, (error, stdout, stderr) => {
-      if (error) {
-        return reject(new Error(`yt-dlp error: ${stderr || error.message}`));
-      }
+      const stream = {
+        status: true,
+        quality: json.quality,
+        url: json.file,
+        filename: json.title || 'video',
+      };
 
-      try {
-        const output = JSON.parse(stdout);
-
-        const metadata = {
-          type: "video",
-          videoID: output.id,
-          url: videoUrl,
-          title: output.title,
-          description: output.description,
-          image: output.thumbnail,
-          thumbnail: output.thumbnail,
-          seconds: output.duration,
-          timestamp: output.timestamp,
-          views: output.view_count,
-        };
-
-        const stream = {
-      status: output.url == "" ? false : true,
-      quality: output.height,
-      url: output.url || null,
-      filename: output.title,
-    };
-
-        resolve({ metadata, stream });
-      } catch (parseErr) {
-        reject(new Error("Failed to parse yt-dlp output: " + parseErr.message));
-      }
-    });
-  });
+      return { metadata, stream };
+    } else {
+      throw new Error("No playable URL found in response.");
+    }
+  } catch (err) {
+    throw new Error("Error fetching RapidAPI response: " + err.message);
+  }
 }
 
+// Express Route Handler
 async function getStreamURL(req, res) {
   const videoID = req.query.id;
 
@@ -84,4 +71,3 @@ async function getStreamURL(req, res) {
 module.exports = {
   getStreamURL,
 };
-
