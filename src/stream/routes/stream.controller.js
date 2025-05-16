@@ -1,7 +1,8 @@
 const youtubedl = require('youtube-dl-exec');
 
-async function getYouTubePlaybackUrls(videoId) {
-  const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+async function getYouTubePlaybackUrls(videoID) {
+  const videoUrl = `https://www.youtube.com/watch?v=${videoID}`;
+
   try {
     const output = await youtubedl(videoUrl, {
       dumpSingleJson: true,
@@ -10,9 +11,6 @@ async function getYouTubePlaybackUrls(videoId) {
       preferFreeFormats: true,
       youtubeSkipDashManifest: true,
     });
-
-    // Choose best quality format (e.g., 720p)
-    const bestFormat = output.formats.find(f => f.qualityLabel === '720p' && f.url);
 
     const metadata = {
       type: "video",
@@ -23,30 +21,27 @@ async function getYouTubePlaybackUrls(videoId) {
       image: output.thumbnail,
       thumbnail: output.thumbnail,
       seconds: output.duration,
-      timestamp: new Date(output.upload_date).toISOString(), // if available
-      duration: {
-        seconds: output.duration,
-        timestamp: new Date(output.duration * 1000).toISOString().substr(11, 8) // HH:mm:ss
-      },
-      ago: output.upload_date, // could be improved
+      timestamp: output.timestamp,
+      // duration: {
+      //   seconds: output.duration,
+      //   timestamp: output.duration
+      //     ? new Date(output.duration * 1000).toISOString().substr(11, 8)
+      //     : null,
+      // },
+      // ago: ago,
       views: output.view_count,
-      author: {
-        name: output.uploader,
-        url: output.uploader_url || null
-      }
     };
 
     const stream = {
-      status: !!bestFormat,
-      quality: bestFormat?.qualityLabel || null,
-      availableQuality: [...new Set(output.formats.map(f => f.qualityLabel).filter(Boolean))],
-      url: bestFormat?.url || null,
-      filename: output._filename || null
+      status: output.url == "" ? false : true,
+      quality: output.height,
+      url: output.url || null,
+      filename: output.title,
     };
 
     return {
       metadata,
-      stream
+      stream,
     };
   } catch (err) {
     throw new Error('Error fetching video info: ' + err.message);
@@ -56,11 +51,11 @@ async function getYouTubePlaybackUrls(videoId) {
 async function getStreamURL(req, res) {
   const videoID = req.query.id;
 
-  if (!videoUrl) {
+  if (!videoID) {
     return res.status(400).json({
       status: 400,
       message: false,
-      error: "url cannot be empty"
+      error: "videoID cannot be empty"
     });
   }
 
