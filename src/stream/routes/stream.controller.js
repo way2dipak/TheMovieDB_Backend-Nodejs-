@@ -1,6 +1,7 @@
 const youtubedl = require('youtube-dl-exec');
 
-async function getYouTubePlaybackUrls(videoUrl) {
+async function getYouTubePlaybackUrls(videoId) {
+  const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
   try {
     const output = await youtubedl(videoUrl, {
       dumpSingleJson: true,
@@ -53,7 +54,7 @@ async function getYouTubePlaybackUrls(videoUrl) {
 }
 
 async function getStreamURL(req, res) {
-  const videoUrl = req.query.url;
+  const videoID = req.query.id;
 
   if (!videoUrl) {
     return res.status(400).json({
@@ -64,7 +65,7 @@ async function getStreamURL(req, res) {
   }
 
   try {
-    const results = await getYouTubePlaybackUrls(videoUrl);
+    const results = await getYouTubePlaybackUrls(videoID);
     return res.status(200).json({
       status: 200,
       message: true,
